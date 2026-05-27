@@ -1,0 +1,1249 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Marketplace Freelance CORHUILA — Presentación</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=IBM+Plex+Mono:wght@400;500;600&family=Literata:ital,wght@0,400;0,500;1,400&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg: #0c0b0f;
+  --surface: #14131a;
+  --surface2: #1c1b24;
+  --border: #252333;
+  --accent: #c8f135;
+  --accent2: #7c6af7;
+  --accent3: #f7a26a;
+  --text: #e8e6f0;
+  --muted: #6a6880;
+  --green: #64dc8c;
+  --red: #f05050;
+  --blue: #64aaF0;
+}
+
+* { margin:0; padding:0; box-sizing:border-box; }
+
+html, body {
+  width:100%; height:100%;
+  background: var(--bg);
+  color: var(--text);
+  font-family: 'Literata', Georgia, serif;
+  overflow: hidden;
+}
+
+/* ─── DECK WRAPPER ─── */
+#deck {
+  width:100%; height:100%;
+  position:relative;
+}
+
+/* ─── SLIDES ─── */
+.slide {
+  position:absolute;
+  inset:0;
+  display:flex;
+  flex-direction:column;
+  padding: 56px 72px 48px;
+  opacity:0;
+  pointer-events:none;
+  transform: translateX(40px);
+  transition: opacity .45s cubic-bezier(.4,0,.2,1), transform .45s cubic-bezier(.4,0,.2,1);
+  overflow:hidden;
+}
+.slide.active {
+  opacity:1;
+  pointer-events:all;
+  transform:translateX(0);
+}
+.slide.exit {
+  opacity:0;
+  transform: translateX(-40px);
+  pointer-events:none;
+}
+
+/* ─── SLIDE LABEL ─── */
+.slide-label {
+  font-family:'IBM Plex Mono',monospace;
+  font-size:11px;
+  font-weight:500;
+  letter-spacing:.18em;
+  text-transform:uppercase;
+  color: var(--muted);
+  margin-bottom:28px;
+  display:flex;
+  align-items:center;
+  gap:12px;
+}
+.slide-label::before {
+  content:'';
+  display:block;
+  width:24px;
+  height:1px;
+  background: var(--muted);
+}
+
+/* ─── HEADINGS ─── */
+.slide h1 {
+  font-family:'Syne',sans-serif;
+  font-weight:800;
+  font-size:clamp(36px,5.5vw,68px);
+  line-height:1.0;
+  color:#fff;
+}
+.slide h1 .hi { color:var(--accent); }
+.slide h2 {
+  font-family:'Syne',sans-serif;
+  font-weight:700;
+  font-size:clamp(24px,3.5vw,42px);
+  line-height:1.1;
+  color:#fff;
+  margin-bottom:32px;
+}
+.slide h3 {
+  font-family:'Syne',sans-serif;
+  font-weight:700;
+  font-size:18px;
+  color:#fff;
+}
+
+/* ─── CONTENT AREA ─── */
+.content {
+  flex:1;
+  display:flex;
+  flex-direction:column;
+  justify-content:center;
+  gap:20px;
+  min-height:0;
+  overflow:hidden;
+}
+.content.top { justify-content:flex-start; }
+.content.col2 {
+  flex-direction:row;
+  gap:36px;
+  align-items:flex-start;
+}
+.col { flex:1; display:flex; flex-direction:column; gap:16px; }
+
+/* ─── ACCENT LINE ─── */
+.rule {
+  width:56px; height:3px;
+  background:var(--accent);
+  border-radius:2px;
+  margin:18px 0 24px;
+}
+
+/* ─── BIG STAT ─── */
+.bigstat {
+  display:flex;
+  gap:40px;
+  flex-wrap:wrap;
+  margin-top:8px;
+}
+.stat-block { display:flex; flex-direction:column; }
+.stat-num {
+  font-family:'Syne',sans-serif;
+  font-size:clamp(40px,5vw,64px);
+  font-weight:800;
+  line-height:1;
+  color:var(--accent);
+}
+.stat-label {
+  font-family:'IBM Plex Mono',monospace;
+  font-size:13px;
+  color:var(--muted);
+  margin-top:4px;
+}
+
+/* ─── LIST ─── */
+.plist { list-style:none; display:flex; flex-direction:column; gap:12px; }
+.plist li {
+  font-size:clamp(14px,1.6vw,20px);
+  color:#c0bdd0;
+  display:flex;
+  align-items:baseline;
+  gap:10px;
+  line-height:1.5;
+}
+.plist li::before {
+  content:'→';
+  color:var(--accent);
+  font-family:'IBM Plex Mono',monospace;
+  font-size:13px;
+  flex-shrink:0;
+}
+.plist li.green::before { color:var(--green); content:'✓'; }
+.plist li.red::before { color:var(--red); content:'✗'; }
+
+/* ─── PILLS ─── */
+.pill {
+  display:inline-flex;
+  align-items:center;
+  font-family:'IBM Plex Mono',monospace;
+  font-size:12px;
+  font-weight:500;
+  padding:5px 14px;
+  border-radius:6px;
+  border:1px solid;
+  white-space:nowrap;
+}
+.pill-green { background:rgba(100,220,140,.1); color:var(--green); border-color:rgba(100,220,140,.25); }
+.pill-yellow { background:rgba(200,241,53,.1); color:var(--accent); border-color:rgba(200,241,53,.25); }
+.pill-purple { background:rgba(124,106,247,.1); color:var(--accent2); border-color:rgba(124,106,247,.25); }
+.pill-orange { background:rgba(247,162,106,.1); color:var(--accent3); border-color:rgba(247,162,106,.25); }
+.pill-red { background:rgba(240,80,80,.1); color:var(--red); border-color:rgba(240,80,80,.25); }
+.pill-blue { background:rgba(100,170,240,.1); color:var(--blue); border-color:rgba(100,170,240,.25); }
+
+/* ─── TAG ─── */
+.tag {
+  font-family:'IBM Plex Mono',monospace;
+  font-size:11px;
+  padding:3px 10px;
+  border-radius:4px;
+  background:rgba(200,241,53,.08);
+  color:var(--accent);
+  border:1px solid rgba(200,241,53,.2);
+}
+.tag-p { background:rgba(124,106,247,.08); color:var(--accent2); border-color:rgba(124,106,247,.2); }
+
+/* ─── CARD ─── */
+.card {
+  background:var(--surface);
+  border:1px solid var(--border);
+  border-radius:10px;
+  padding:20px 24px;
+}
+.card-sm { padding:14px 18px; }
+
+/* ─── TABLE ─── */
+.ptable {
+  width:100%;
+  border-collapse:collapse;
+  font-size:clamp(11px,1.2vw,14px);
+}
+.ptable th {
+  font-family:'IBM Plex Mono',monospace;
+  font-size:11px;
+  font-weight:500;
+  text-transform:uppercase;
+  letter-spacing:.08em;
+  color:var(--muted);
+  padding:9px 12px;
+  text-align:left;
+  border-bottom:1px solid var(--border);
+  background:var(--surface2);
+}
+.ptable td {
+  padding:9px 12px;
+  border-bottom:1px solid var(--border);
+  color:#c0bdd0;
+  vertical-align:middle;
+}
+.ptable tr:last-child td { border-bottom:none; }
+.ptable tr:hover td { background:rgba(255,255,255,.02); }
+
+/* ─── FLOW ─── */
+.flow {
+  display:flex;
+  flex-wrap:wrap;
+  gap:0;
+  align-items:center;
+}
+.flow-step {
+  background:var(--surface2);
+  border:1px solid var(--border);
+  border-radius:8px;
+  padding:10px 16px;
+  text-align:center;
+}
+.flow-step .sn {
+  font-family:'IBM Plex Mono',monospace;
+  font-size:10px;
+  color:var(--accent);
+  display:block;
+  margin-bottom:3px;
+}
+.flow-step .sl {
+  font-family:'Syne',sans-serif;
+  font-weight:700;
+  font-size:13px;
+  color:#fff;
+}
+.farrow { color:var(--muted); font-size:16px; padding:0 6px; }
+
+/* ─── STATE CHIPS ─── */
+.states { display:flex; flex-wrap:wrap; gap:8px; align-items:center; }
+.state {
+  font-family:'IBM Plex Mono',monospace;
+  font-size:12px;
+  padding:7px 14px;
+  border-radius:6px;
+  border:1px solid;
+  line-height:1.3;
+}
+.s-pend  { background:rgba(247,162,106,.1); color:var(--accent3); border-color:rgba(247,162,106,.3); }
+.s-prog  { background:rgba(100,170,240,.1); color:var(--blue);    border-color:rgba(100,170,240,.3); }
+.s-rev   { background:rgba(200,241,53,.1);  color:var(--accent);  border-color:rgba(200,241,53,.3); }
+.s-done  { background:rgba(100,220,140,.1); color:var(--green);   border-color:rgba(100,220,140,.3); }
+.s-canc  { background:rgba(240,80,80,.1);   color:var(--red);     border-color:rgba(240,80,80,.3); }
+.sarr { color:var(--muted); font-size:18px; }
+
+/* ─── ACTOR CARDS ─── */
+.actor-grid {
+  display:grid;
+  grid-template-columns:repeat(2,1fr);
+  gap:14px;
+}
+.actor-card {
+  background:var(--surface);
+  border:1px solid var(--border);
+  border-radius:10px;
+  padding:18px 22px;
+}
+.actor-icon { font-size:24px; margin-bottom:8px; }
+.actor-name {
+  font-family:'Syne',sans-serif;
+  font-weight:700;
+  font-size:16px;
+  color:#fff;
+  margin-bottom:4px;
+}
+.actor-desc { font-size:13px; color:#b0adbe; margin-bottom:8px; }
+.actor-rfs { font-family:'IBM Plex Mono',monospace; font-size:11px; color:var(--accent); }
+
+/* ─── TECH GRID ─── */
+.tech-grid {
+  display:grid;
+  grid-template-columns:repeat(auto-fill,minmax(160px,1fr));
+  gap:12px;
+}
+.tech-card {
+  background:var(--surface2);
+  border:1px solid var(--border);
+  border-radius:8px;
+  padding:16px;
+}
+.tech-layer {
+  font-family:'IBM Plex Mono',monospace;
+  font-size:10px;
+  text-transform:uppercase;
+  letter-spacing:.1em;
+  color:var(--muted);
+  margin-bottom:6px;
+}
+.tech-name {
+  font-family:'Syne',sans-serif;
+  font-weight:700;
+  font-size:17px;
+  color:var(--accent);
+  margin-bottom:4px;
+}
+.tech-desc { font-size:12px; color:#b0adbe; line-height:1.5; }
+
+/* ─── SPRINT ROW ─── */
+.sprint-row {
+  display:grid;
+  grid-template-columns:repeat(4,1fr);
+  gap:12px;
+}
+.sprint {
+  background:var(--surface);
+  border:1px solid var(--border);
+  border-radius:10px;
+  padding:18px;
+}
+.sprint-num {
+  font-family:'IBM Plex Mono',monospace;
+  font-size:10px;
+  text-transform:uppercase;
+  color:var(--accent);
+  margin-bottom:6px;
+}
+.sprint-title {
+  font-family:'Syne',sans-serif;
+  font-weight:700;
+  font-size:14px;
+  color:#fff;
+  margin-bottom:10px;
+}
+.sprint ul { list-style:none; display:flex; flex-direction:column; gap:6px; }
+.sprint ul li {
+  font-family:'IBM Plex Mono',monospace;
+  font-size:11px;
+  color:#b0adbe;
+  padding-left:12px;
+  position:relative;
+}
+.sprint ul li::before {
+  content:'·';
+  position:absolute;
+  left:0;
+  color:var(--accent2);
+}
+
+/* ─── HIGHLIGHT BOX ─── */
+.hbox {
+  background:rgba(200,241,53,.06);
+  border:1px solid rgba(200,241,53,.2);
+  border-left:3px solid var(--accent);
+  border-radius:6px;
+  padding:14px 18px;
+  font-size:14px;
+  color:#c0bdd0;
+  line-height:1.6;
+}
+.hbox strong { color:#fff; }
+
+/* ─── TITLE SLIDE DECORATION ─── */
+.title-deco {
+  position:absolute;
+  inset:0;
+  pointer-events:none;
+  overflow:hidden;
+}
+.title-deco .orb1 {
+  position:absolute;
+  top:-100px; right:-80px;
+  width:500px; height:500px;
+  background:radial-gradient(circle, rgba(124,106,247,.18) 0%, transparent 65%);
+  border-radius:50%;
+}
+.title-deco .orb2 {
+  position:absolute;
+  bottom:-120px; left:60px;
+  width:400px; height:400px;
+  background:radial-gradient(circle, rgba(200,241,53,.1) 0%, transparent 65%);
+  border-radius:50%;
+}
+.title-deco .grid-line {
+  position:absolute;
+  inset:0;
+  background-image:
+    linear-gradient(rgba(255,255,255,.03) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255,255,255,.03) 1px, transparent 1px);
+  background-size: 60px 60px;
+}
+
+/* ─── NAVIGATION ─── */
+#nav-bar {
+  position:fixed;
+  bottom:0; left:0; right:0;
+  height:54px;
+  background:rgba(12,11,15,.92);
+  border-top:1px solid var(--border);
+  backdrop-filter:blur(12px);
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  padding:0 36px;
+  z-index:999;
+}
+#progress-wrap {
+  flex:1;
+  max-width:400px;
+  margin:0 24px;
+}
+#progress-bar {
+  height:3px;
+  background:var(--border);
+  border-radius:2px;
+  position:relative;
+  overflow:hidden;
+}
+#progress-fill {
+  height:100%;
+  background:var(--accent);
+  border-radius:2px;
+  transition:width .4s cubic-bezier(.4,0,.2,1);
+}
+#slide-counter {
+  font-family:'IBM Plex Mono',monospace;
+  font-size:12px;
+  color:var(--muted);
+  text-align:center;
+  margin-top:5px;
+}
+.nav-btn {
+  width:38px; height:38px;
+  border:1px solid var(--border);
+  background:var(--surface);
+  border-radius:8px;
+  cursor:pointer;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  color:var(--text);
+  font-size:18px;
+  transition:background .2s, border-color .2s;
+}
+.nav-btn:hover { background:var(--surface2); border-color:#3a3848; }
+.nav-btn:disabled { opacity:.35; cursor:default; }
+#slide-title-bar {
+  font-family:'Syne',sans-serif;
+  font-size:12px;
+  font-weight:600;
+  color:var(--muted);
+  white-space:nowrap;
+  overflow:hidden;
+  text-overflow:ellipsis;
+  max-width:260px;
+}
+
+/* Keyboard hint */
+#kb-hint {
+  position:fixed;
+  bottom:62px; right:20px;
+  font-family:'IBM Plex Mono',monospace;
+  font-size:10px;
+  color:var(--muted);
+  opacity:.6;
+}
+
+/* Scroll inside slide if needed */
+.scroll-content {
+  flex:1;
+  overflow-y:auto;
+  scrollbar-width:thin;
+  scrollbar-color: var(--border) transparent;
+}
+.scroll-content::-webkit-scrollbar { width:4px; }
+.scroll-content::-webkit-scrollbar-thumb { background:var(--border); border-radius:2px; }
+
+/* BDD styles */
+.bdd {
+  background:var(--surface2);
+  border:1px solid var(--border);
+  border-radius:8px;
+  padding:14px 18px;
+  font-size:13px;
+  color:#b0adbe;
+  line-height:1.8;
+}
+.bdd b { color:var(--accent2); font-family:'IBM Plex Mono',monospace; font-size:12px; }
+
+/* BPMN lane */
+.lane {
+  border:1px solid var(--border);
+  border-radius:8px;
+  padding:14px 16px;
+  font-size:13px;
+  color:#b0adbe;
+  line-height:1.7;
+}
+.lane-lbl {
+  font-family:'IBM Plex Mono',monospace;
+  font-size:10px;
+  text-transform:uppercase;
+  letter-spacing:.1em;
+  margin-bottom:6px;
+}
+
+/* hu card */
+.hu-header {
+  display:flex;
+  align-items:center;
+  gap:12px;
+  margin-bottom:16px;
+  flex-wrap:wrap;
+}
+.hu-story {
+  font-size:clamp(13px,1.5vw,16px);
+  color:#c0bdd0;
+  line-height:1.7;
+  background:rgba(255,255,255,.02);
+  border-left:3px solid var(--accent2);
+  padding:12px 16px;
+  border-radius:0 6px 6px 0;
+  margin-bottom:16px;
+  font-style:italic;
+}
+.hu-story em { color:var(--text); font-style:normal; font-weight:500; }
+
+/* scope cols */
+.scope-col {
+  background:var(--surface);
+  border:1px solid var(--border);
+  border-radius:10px;
+  padding:20px;
+}
+.scope-col .stitle {
+  font-family:'Syne',sans-serif;
+  font-weight:700;
+  font-size:14px;
+  margin-bottom:12px;
+}
+.scope-col ul { list-style:none; display:flex; flex-direction:column; gap:8px; }
+.scope-col ul li { font-size:13px; color:#b0adbe; display:flex; gap:8px; align-items:baseline; }
+
+/* UI PREVIEW */
+.ui-mock {
+  background:var(--surface2);
+  border:1px solid var(--border);
+  border-radius:10px;
+  padding:14px;
+}
+.ui-topbar {
+  display:flex;
+  align-items:center;
+  gap:6px;
+  margin-bottom:12px;
+}
+.ui-dot { width:8px; height:8px; border-radius:50%; }
+.ui-nav-mock {
+  width:120px;
+  background:var(--surface);
+  border-radius:6px;
+  padding:10px;
+  margin-right:12px;
+  flex-shrink:0;
+}
+.ui-nav-item {
+  font-family:'IBM Plex Mono',monospace;
+  font-size:10px;
+  padding:5px 8px;
+  border-radius:4px;
+  color:var(--muted);
+  margin-bottom:3px;
+}
+.ui-nav-item.active-mock { background:rgba(200,241,53,.1); color:var(--accent); }
+</style>
+</head>
+<body>
+
+<div id="deck">
+
+<!-- ══════════════════════════════════════════════════════════
+  SLIDE 01 — PORTADA
+════════════════════════════════════════════════════════════ -->
+<div class="slide active" data-title="Portada">
+  <div class="title-deco">
+    <div class="grid-line"></div>
+    <div class="orb1"></div>
+    <div class="orb2"></div>
+  </div>
+  <div style="flex:1; display:flex; flex-direction:column; justify-content:center; max-width:820px; position:relative; z-index:1;">
+    <div class="tag" style="margin-bottom:24px; font-size:12px;">CORHUILA · Análisis y Diseño de Sistemas · 5° Semestre · 2025</div>
+    <h1>Marketplace<br><span class="hi">Freelance</span></h1>
+    <div class="rule"></div>
+    <p style="font-size:clamp(15px,1.8vw,22px); color:#b0adbe; line-height:1.6; max-width:560px;">
+      Plataforma de contratación para conectar freelancers con clientes dentro del ecosistema universitario CORHUILA.
+    </p>
+    <div class="bigstat" style="margin-top:40px;">
+      <div class="stat-block"><div class="stat-num">12</div><div class="stat-label">RF Definidos</div></div>
+      <div class="stat-block"><div class="stat-num">39</div><div class="stat-label">Story Points</div></div>
+      <div class="stat-block"><div class="stat-num">4</div><div class="stat-label">Sprints</div></div>
+      <div class="stat-block"><div class="stat-num">4</div><div class="stat-label">Actores</div></div>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════════════════════
+  SLIDE 02 — EL PROBLEMA
+════════════════════════════════════════════════════════════ -->
+<div class="slide" data-title="El Problema">
+  <div class="slide-label">Contexto del Proyecto</div>
+  <h2>El Problema</h2>
+  <div class="content col2">
+    <div class="col">
+      <ul class="plist">
+        <li>Sin catálogo estructurado de perfiles profesionales locales</li>
+        <li>Contratos informales sin trazabilidad del estado del trabajo</li>
+        <li>Baja visibilidad frente a Upwork y Fiverr (plataformas extranjeras)</li>
+        <li>Sin mecanismos de calificación ni reputación</li>
+        <li>Dependencia de plataformas que ignoran el contexto económico regional</li>
+      </ul>
+    </div>
+    <div class="col">
+      <div class="hbox">
+        <strong>Propuesta de valor:</strong><br><br>
+        Una plataforma propia, contextualizada al ecosistema CORHUILA, que permita el registro de freelancers, publicación de servicios, contratación trazable y calificación post-proyecto.
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════════════════════
+  SLIDE 03 — FLUJO DEL NEGOCIO
+════════════════════════════════════════════════════════════ -->
+<div class="slide" data-title="Flujo del Negocio">
+  <div class="slide-label">Contexto del Proyecto</div>
+  <h2>Flujo del Negocio</h2>
+  <div class="content">
+    <div class="flow" style="gap:0; justify-content:center; flex-wrap:wrap; margin-bottom:20px;">
+      <div class="flow-step"><span class="sn">01</span><span class="sl">Registro</span></div>
+      <span class="farrow">→</span>
+      <div class="flow-step"><span class="sn">02</span><span class="sl">Publicación</span></div>
+      <span class="farrow">→</span>
+      <div class="flow-step"><span class="sn">03</span><span class="sl">Solicitud</span></div>
+      <span class="farrow">→</span>
+      <div class="flow-step"><span class="sn">04</span><span class="sl">Respuesta</span></div>
+      <span class="farrow">→</span>
+      <div class="flow-step"><span class="sn">05</span><span class="sl">Proyecto</span></div>
+      <span class="farrow">→</span>
+      <div class="flow-step"><span class="sn">06</span><span class="sl">Seguimiento</span></div>
+      <span class="farrow">→</span>
+      <div class="flow-step"><span class="sn">07</span><span class="sl">Calificación</span></div>
+    </div>
+
+    <div class="card">
+      <div class="card-header" style="margin-bottom:12px; font-family:'Syne',sans-serif; font-weight:700; font-size:15px; color:#fff;">Estados del Proyecto</div>
+      <div class="states" style="margin-bottom:10px;">
+        <span class="state s-pend">PENDIENTE</span>
+        <span class="sarr">→</span>
+        <span class="state s-prog">EN_PROGRESO</span>
+        <span class="sarr">→</span>
+        <span class="state s-rev">EN_REVISIÓN</span>
+        <span class="sarr">→</span>
+        <span class="state s-done">COMPLETADO</span>
+      </div>
+      <div class="states">
+        <span style="font-size:12px;color:var(--muted);font-family:'IBM Plex Mono',monospace;">Desde cualquier estado:</span>
+        <span class="state s-canc">CANCELADO</span>
+        <span class="pill pill-red" style="margin-left:6px;">Irreversible</span>
+        <span class="pill pill-green" style="margin-left:4px;">Solo COMPLETADO permite calificar</span>
+      </div>
+    </div>
+
+    <div class="hbox">
+      <strong>Regla clave (RF09):</strong> El proyecto se crea <em>automáticamente</em> al aceptar una solicitud. Operación atómica — si falla, todo se revierte. Las fechas <em>fechaInicio</em> y <em>fechaFin</em> las registra el Sistema automáticamente (RF11).
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════════════════════
+  SLIDE 04 — ALCANCE MVP
+════════════════════════════════════════════════════════════ -->
+<div class="slide" data-title="Alcance del MVP">
+  <div class="slide-label">Contexto del Proyecto</div>
+  <h2>Alcance del MVP</h2>
+  <div class="content col2">
+    <div class="scope-col" style="border-color:rgba(100,220,140,.25);">
+      <div class="stitle" style="color:var(--green);">✓ Incluido en el MVP</div>
+      <ul>
+        <li><span style="color:var(--green); flex-shrink:0;">✓</span> Gestión de freelancers, clientes y categorías</li>
+        <li><span style="color:var(--green); flex-shrink:0;">✓</span> Publicación y filtrado de servicios</li>
+        <li><span style="color:var(--green); flex-shrink:0;">✓</span> Flujo de solicitud (aceptar / rechazar)</li>
+        <li><span style="color:var(--green); flex-shrink:0;">✓</span> Creación automática de proyectos</li>
+        <li><span style="color:var(--green); flex-shrink:0;">✓</span> Seguimiento de estados y fechas</li>
+        <li><span style="color:var(--green); flex-shrink:0;">✓</span> Calificación básica al finalizar (Sprint 4)</li>
+      </ul>
+    </div>
+    <div class="scope-col" style="border-color:rgba(240,80,80,.25);">
+      <div class="stitle" style="color:var(--red);">✗ Fuera del MVP</div>
+      <ul>
+        <li><span style="color:var(--red); flex-shrink:0;">✗</span> Autenticación y autorización JWT <span class="pill pill-orange" style="font-size:10px; padding:2px 8px; margin-left:6px;">Deuda técnica</span></li>
+        <li><span style="color:var(--red); flex-shrink:0;">✗</span> Pasarela de pagos en línea</li>
+        <li><span style="color:var(--red); flex-shrink:0;">✗</span> Mensajería en tiempo real</li>
+        <li><span style="color:var(--red); flex-shrink:0;">✗</span> Notificaciones por correo</li>
+        <li><span style="color:var(--red); flex-shrink:0;">✗</span> Panel de estadísticas y reportes</li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════════════════════
+  SLIDE 05 — RF
+════════════════════════════════════════════════════════════ -->
+<div class="slide" data-title="Requerimientos Funcionales">
+  <div class="slide-label">Análisis de Requerimientos</div>
+  <h2>Requerimientos Funcionales</h2>
+  <div class="content top" style="padding-top:4px;">
+    <div style="display:flex; gap:16px; margin-bottom:16px; flex-wrap:wrap;">
+      <div class="stat-block"><div class="stat-num" style="font-size:36px;">12</div><div class="stat-label">RF Definidos</div></div>
+      <div class="stat-block"><div class="stat-num" style="font-size:36px; color:var(--green);">10</div><div class="stat-label">Implementados</div></div>
+    </div>
+    <div class="scroll-content">
+      <table class="ptable">
+        <thead><tr><th>ID</th><th>Nombre</th><th>Descripción clave</th><th>Prioridad</th></tr></thead>
+        <tbody>
+          <tr><td><span class="tag">RF01</span></td><td>Registro de freelancer</td><td>Crear, editar, eliminar. UNIQUE en documento y correo.</td><td><span class="pill pill-yellow">ALTA</span></td></tr>
+          <tr><td><span class="tag">RF02</span></td><td>Gestión de habilidades</td><td>Agregar / eliminar skills de texto libre (React, Python…).</td><td><span class="pill pill-yellow">ALTA</span></td></tr>
+          <tr><td><span class="tag">RF03</span></td><td>Gestión de categorías</td><td>No eliminar con servicios activos.</td><td><span class="pill pill-orange">MEDIA</span></td></tr>
+          <tr><td><span class="tag">RF04</span></td><td>Registro de clientes</td><td>UNIQUE en documento y correo.</td><td><span class="pill pill-yellow">ALTA</span></td></tr>
+          <tr><td><span class="tag">RF05</span></td><td>Publicación de servicios</td><td>Título, descripción, precio, tiempo, categoría, estado.</td><td><span class="pill pill-yellow">ALTA</span></td></tr>
+          <tr><td><span class="tag">RF06</span></td><td>Consulta y filtrado</td><td>Solo activos. Filtro por categoría y freelancer. &lt;2s.</td><td><span class="pill pill-yellow">ALTA</span></td></tr>
+          <tr><td><span class="tag">RF07</span></td><td>Envío de solicitud</td><td>Cliente envía mensaje → estado PENDIENTE.</td><td><span class="pill pill-yellow">ALTA</span></td></tr>
+          <tr><td><span class="tag">RF08</span></td><td>Aceptar / rechazar</td><td>Solo solicitudes PENDIENTES. Solo el freelancer.</td><td><span class="pill pill-yellow">ALTA</span></td></tr>
+          <tr><td><span class="tag">RF09</span></td><td>Proyecto automático</td><td>Al aceptar → proyecto PENDIENTE. Operación atómica.</td><td><span class="pill pill-yellow">ALTA</span></td></tr>
+          <tr><td><span class="tag">RF10</span></td><td>Seguimiento de proyecto</td><td>Transiciones válidas. COMPLETADO/CANCELADO son finales.</td><td><span class="pill pill-yellow">ALTA</span></td></tr>
+          <tr><td><span class="tag">RF11</span></td><td>Fechas automáticas</td><td>fechaInicio y fechaFin. No modificables por usuario.</td><td><span class="pill pill-orange">MEDIA</span></td></tr>
+          <tr><td><span class="tag">RF12</span></td><td>Calificación</td><td>Puntuación 1-5. Solo proyectos COMPLETADOS. Sprint 4.</td><td><span class="pill pill-orange">MEDIA</span></td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════════════════════
+  SLIDE 06 — RNF
+════════════════════════════════════════════════════════════ -->
+<div class="slide" data-title="Requerimientos No Funcionales">
+  <div class="slide-label">Análisis de Requerimientos</div>
+  <h2>Requerimientos No Funcionales</h2>
+  <div class="content top" style="padding-top:4px;">
+    <div style="display:flex; gap:16px; margin-bottom:16px; flex-wrap:wrap;">
+      <div class="stat-block"><div class="stat-num" style="font-size:36px;">10</div><div class="stat-label">RNF Definidos</div></div>
+      <div class="stat-block"><div class="stat-num" style="font-size:36px; color:var(--green);">7</div><div class="stat-label">Implementados</div></div>
+      <div class="stat-block"><div class="stat-num" style="font-size:36px; color:var(--red);">3</div><div class="stat-label">Pendientes</div></div>
+    </div>
+    <div class="scroll-content">
+      <table class="ptable">
+        <thead><tr><th>ID</th><th>Nombre</th><th>Categoría</th><th>Detalle clave</th><th>Estado</th></tr></thead>
+        <tbody>
+          <tr><td><span class="tag tag-p">RNF01</span></td><td>Rendimiento</td><td>Desempeño</td><td>CRUD &lt; 2 segundos</td><td><span class="pill pill-green">✓ OK</span></td></tr>
+          <tr><td><span class="tag tag-p">RNF02</span></td><td>Usabilidad</td><td>Usabilidad</td><td>Sidebar. Sin capacitación previa</td><td><span class="pill pill-green">✓ OK</span></td></tr>
+          <tr><td><span class="tag tag-p">RNF03</span></td><td>Seguridad</td><td>Seguridad</td><td>bcrypt + JWT — <strong style="color:var(--accent3);">Deuda técnica del MVP</strong></td><td><span class="pill pill-orange">PENDIENTE</span></td></tr>
+          <tr><td><span class="tag tag-p">RNF04</span></td><td>Disponibilidad</td><td>Confiabilidad</td><td>95% uptime 7am–7pm. Recuperación &lt; 30 min</td><td><span class="pill pill-orange">PENDIENTE</span></td></tr>
+          <tr><td><span class="tag tag-p">RNF05</span></td><td>Compatibilidad</td><td>Portabilidad</td><td>Chrome / Firefox / Edge 100+. Desktop y móvil</td><td><span class="pill pill-green">✓ OK</span></td></tr>
+          <tr><td><span class="tag tag-p">RNF06</span></td><td>Escalabilidad</td><td>Mantenibilidad</td><td>Arquitectura en capas. Schema Prisma facilita evolución</td><td><span class="pill pill-orange">PENDIENTE</span></td></tr>
+          <tr><td><span class="tag tag-p">RNF07</span></td><td>Mantenibilidad</td><td>Mantenibilidad</td><td>Convenciones NestJS: controller + service + module</td><td><span class="pill pill-green">✓ OK</span></td></tr>
+          <tr><td><span class="tag tag-p">RNF08</span></td><td>Portabilidad</td><td>Portabilidad</td><td>Docker + docker-compose.yml define todos los servicios</td><td><span class="pill pill-green">✓ OK</span></td></tr>
+          <tr><td><span class="tag tag-p">RNF09</span></td><td>Integridad de datos</td><td>Confiabilidad</td><td>UNIQUE doc/email. Claves foráneas. Prisma valida</td><td><span class="pill pill-green">✓ OK</span></td></tr>
+          <tr><td><span class="tag tag-p">RNF10</span></td><td>Trazabilidad</td><td>Auditabilidad</td><td>createdAt y updatedAt automáticos (Prisma)</td><td><span class="pill pill-green">✓ OK</span></td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════════════════════
+  SLIDE 07 — ACTORES
+════════════════════════════════════════════════════════════ -->
+<div class="slide" data-title="Actores del Sistema">
+  <div class="slide-label">Actores del Sistema</div>
+  <h2>Los 4 Actores</h2>
+  <div class="content">
+    <div class="actor-grid">
+      <div class="actor-card">
+        <div class="actor-icon">👤</div>
+        <div class="actor-name">Administrador</div>
+        <div class="actor-desc">Gestiona el catálogo y configuración global de la plataforma.</div>
+        <div class="actor-rfs">RF01 · RF02 · RF03 · RF04</div>
+      </div>
+      <div class="actor-card">
+        <div class="actor-icon">💼</div>
+        <div class="actor-name">Freelancer</div>
+        <div class="actor-desc">Publica servicios, responde solicitudes y actualiza el estado del proyecto.</div>
+        <div class="actor-rfs">RF05 · RF06 · RF08 · RF10</div>
+      </div>
+      <div class="actor-card">
+        <div class="actor-icon">🛒</div>
+        <div class="actor-name">Cliente</div>
+        <div class="actor-desc">Explora el catálogo, envía solicitudes y califica al finalizar.</div>
+        <div class="actor-rfs">RF06 · RF07 · RF12</div>
+      </div>
+      <div class="actor-card" style="border-color:rgba(124,106,247,.3);">
+        <div class="actor-icon">⚙️</div>
+        <div class="actor-name">Sistema</div>
+        <div class="actor-desc">Actor interno. Crea proyectos automáticamente y registra fechas de inicio y fin.</div>
+        <div class="actor-rfs" style="color:var(--accent2);">RF09 · RF11</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════════════════════
+  SLIDE 08 — HU RESUMEN
+════════════════════════════════════════════════════════════ -->
+<div class="slide" data-title="Historias de Usuario — Resumen">
+  <div class="slide-label">Historias de Usuario</div>
+  <h2>5 Historias · 39 Story Points</h2>
+  <div class="content">
+    <table class="ptable">
+      <thead><tr><th>ID</th><th>Historia</th><th>Rol</th><th>SP</th><th>Sprint</th></tr></thead>
+      <tbody>
+        <tr>
+          <td><span class="tag">HU-01</span></td>
+          <td>Registrar Perfil de Freelancer</td>
+          <td><span class="pill pill-orange" style="font-size:11px; padding:3px 10px;">Administrador</span></td>
+          <td><span style="font-family:'IBM Plex Mono',monospace; font-size:15px; font-weight:700; color:var(--accent);">8</span></td>
+          <td><span class="pill pill-purple" style="font-size:11px; padding:3px 10px;">Sprint 1</span></td>
+        </tr>
+        <tr>
+          <td><span class="tag">HU-02</span></td>
+          <td>Publicar un Servicio</td>
+          <td><span class="pill pill-yellow" style="font-size:11px; padding:3px 10px;">Freelancer</span></td>
+          <td><span style="font-family:'IBM Plex Mono',monospace; font-size:15px; font-weight:700; color:var(--accent);">5</span></td>
+          <td><span class="pill pill-purple" style="font-size:11px; padding:3px 10px;">Sprint 2</span></td>
+        </tr>
+        <tr>
+          <td><span class="tag">HU-03</span></td>
+          <td>Enviar Solicitud de Contratación</td>
+          <td><span class="pill pill-blue" style="font-size:11px; padding:3px 10px;">Cliente</span></td>
+          <td><span style="font-family:'IBM Plex Mono',monospace; font-size:15px; font-weight:700; color:var(--accent);">5</span></td>
+          <td><span class="pill pill-purple" style="font-size:11px; padding:3px 10px;">Sprint 2</span></td>
+        </tr>
+        <tr>
+          <td><span class="tag">HU-04</span></td>
+          <td>Gestionar Solicitudes Recibidas</td>
+          <td><span class="pill pill-yellow" style="font-size:11px; padding:3px 10px;">Freelancer</span></td>
+          <td><span style="font-family:'IBM Plex Mono',monospace; font-size:15px; font-weight:700; color:var(--accent);">8</span></td>
+          <td><span class="pill pill-purple" style="font-size:11px; padding:3px 10px;">Sprint 3</span></td>
+        </tr>
+        <tr style="background:rgba(200,241,53,.03);">
+          <td><span class="tag">HU-05</span></td>
+          <td>Seguimiento del Estado del Proyecto</td>
+          <td><span class="pill pill-yellow" style="font-size:11px; padding:3px 10px;">Freelancer</span></td>
+          <td><span style="font-family:'IBM Plex Mono',monospace; font-size:18px; font-weight:800; color:var(--accent);">13</span> <span style="font-size:11px; color:var(--muted);">★ máx</span></td>
+          <td><span class="pill pill-purple" style="font-size:11px; padding:3px 10px;">Sprint 3</span></td>
+        </tr>
+      </tbody>
+    </table>
+    <div class="hbox">
+      <strong>Formato BDD:</strong> Cada criterio de aceptación usa el patrón <em>Dado que / Cuando / Entonces</em>. HU-05 es la historia de mayor complejidad con <strong>13 SP</strong>.
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════════════════════
+  SLIDE 09 — HU-01
+════════════════════════════════════════════════════════════ -->
+<div class="slide" data-title="HU-01 · Registrar Freelancer">
+  <div class="slide-label">Historias de Usuario</div>
+  <h2>HU-01 · Registrar Perfil de Freelancer</h2>
+  <div class="content">
+    <div class="hu-header">
+      <span class="pill pill-yellow">ALTA prioridad</span>
+      <span class="pill pill-purple">8 Story Points</span>
+      <span class="pill pill-orange">Sprint 1</span>
+    </div>
+    <div class="hu-story">
+      Como <em>administrador de la plataforma</em>, quiero <em>registrar un nuevo freelancer con su información profesional y habilidades técnicas</em>, para que pueda <em>publicar servicios en el marketplace y ser contratado</em>.
+    </div>
+    <div style="font-family:'Syne',sans-serif; font-weight:700; font-size:14px; color:#fff; margin-bottom:10px;">Criterios de Aceptación (5)</div>
+    <div style="display:flex; flex-direction:column; gap:8px;">
+      <div class="bdd"><b>CA-01</b> · Validación campo obligatorio — <b>Dado</b> el formulario → <b>cuando</b> guarda sin 'nombre' → <b>entonces</b> muestra "El nombre es obligatorio" y no guarda.</div>
+      <div class="bdd"><b>CA-02</b> · Documento duplicado — <b>Dado</b> ya existe el doc. → <b>cuando</b> registra otro igual → <b>entonces</b> error "El documento ya está registrado".</div>
+      <div class="bdd"><b>CA-03</b> · Registro exitoso — <b>Dado</b> campos válidos → <b>cuando</b> hace clic en Guardar → <b>entonces</b> aparece en el listado inmediatamente.</div>
+      <div class="bdd"><b>CA-04/05</b> · Habilidades — Agregar "React" → aparece en lista y puede eliminarse individualmente. Al eliminar, solo esa desaparece.</div>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════════════════════
+  SLIDE 10 — HU-04
+════════════════════════════════════════════════════════════ -->
+<div class="slide" data-title="HU-04 · Gestionar Solicitudes">
+  <div class="slide-label">Historias de Usuario</div>
+  <h2>HU-04 · Gestionar Solicitudes Recibidas</h2>
+  <div class="content">
+    <div class="hu-header">
+      <span class="pill pill-yellow">ALTA prioridad</span>
+      <span class="pill pill-purple">8 Story Points</span>
+      <span class="pill pill-orange">Sprint 3</span>
+    </div>
+    <div class="hu-story">
+      Como <em>freelancer</em>, quiero <em>ver, aceptar o rechazar las solicitudes de contratación</em>, para que <em>solo trabajar con clientes y proyectos que me interesen</em>.
+    </div>
+    <div class="content col2" style="flex:unset; margin-top:8px;">
+      <div class="col">
+        <div style="font-family:'Syne',sans-serif; font-weight:700; font-size:14px; color:#fff; margin-bottom:10px;">Criterios clave</div>
+        <div class="bdd"><b>CA-02</b> · Solo el freelancer dueño del servicio puede aceptar o rechazar.</div>
+        <div class="bdd" style="margin-top:8px;"><b>CA-03 (RF09)</b> · Al aceptar: el sistema crea automáticamente un proyecto en estado PENDIENTE. Operación atómica.</div>
+      </div>
+      <div class="col">
+        <div class="hbox">
+          <strong>¿Qué pasa si falla la creación del proyecto?</strong><br><br>
+          La transacción se revierte. La solicitud vuelve a estado <strong>PENDIENTE</strong>. No queda ningún proyecto incompleto en la base de datos.
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════════════════════
+  SLIDE 11 — HU-05
+════════════════════════════════════════════════════════════ -->
+<div class="slide" data-title="HU-05 · Seguimiento del Proyecto">
+  <div class="slide-label">Historias de Usuario</div>
+  <h2>HU-05 · Seguimiento del Proyecto</h2>
+  <div class="content">
+    <div class="hu-header">
+      <span class="pill pill-yellow">ALTA prioridad</span>
+      <span class="pill pill-purple">13 SP — Mayor complejidad</span>
+      <span class="pill pill-orange">Sprint 3</span>
+    </div>
+    <div class="hu-story">
+      Como <em>freelancer</em>, quiero <em>actualizar el estado del proyecto y que el sistema registre automáticamente las fechas</em>, para que <em>clientes y administradores puedan rastrear el avance</em>.
+    </div>
+    <div style="font-family:'Syne',sans-serif; font-weight:700; font-size:14px; color:#fff; margin-bottom:12px;">Máquina de estados</div>
+    <div class="states" style="margin-bottom:12px;">
+      <span class="state s-pend">PENDIENTE<br><span style="font-size:10px;">Sistema (auto)</span></span>
+      <span class="sarr">→</span>
+      <span class="state s-prog">EN_PROGRESO<br><span style="font-size:10px;">Freelancer · fechaInicio ✓</span></span>
+      <span class="sarr">→</span>
+      <span class="state s-rev">EN_REVISIÓN<br><span style="font-size:10px;">Freelancer</span></span>
+      <span class="sarr">→</span>
+      <span class="state s-done">COMPLETADO<br><span style="font-size:10px;">Freelancer · fechaFin ✓</span></span>
+    </div>
+    <div class="states">
+      <span style="font-size:12px;color:var(--muted);font-family:'IBM Plex Mono',monospace;">Desde cualquier estado:</span>
+      <span class="state s-canc">CANCELADO · fechaFin ✓ · sin calificación</span>
+    </div>
+    <div class="hbox" style="margin-top:14px;">
+      Solo proyectos <strong>COMPLETADOS</strong> habilitan la calificación (RF12, Sprint 4). Los estados <strong>COMPLETADO</strong> y <strong>CANCELADO</strong> son irreversibles.
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════════════════════
+  SLIDE 12 — BPMN P1
+════════════════════════════════════════════════════════════ -->
+<div class="slide" data-title="BPMN · P1 Contratación">
+  <div class="slide-label">Modelado BPMN</div>
+  <h2>P1 · Contratación de Servicio</h2>
+  <div class="content" style="gap:12px;">
+    <div class="lane" style="background:rgba(100,170,240,.05); border-color:rgba(100,170,240,.2);">
+      <div class="lane-lbl" style="color:var(--blue);">🛒 CLIENTE</div>
+      🟢 <strong style="color:#fff;">INICIO</strong> → Busca y filtra servicios (RF06) → Selecciona servicio → Redacta mensaje → Envía solicitud (RF07) → Solicitud creada en estado <span class="state s-pend" style="display:inline; padding:2px 8px;">PENDIENTE</span>
+    </div>
+    <div class="lane" style="background:rgba(200,241,53,.04); border-color:rgba(200,241,53,.15);">
+      <div class="lane-lbl" style="color:var(--accent);">💼 FREELANCER</div>
+      Recibe notificación de solicitud → Revisa solicitud → <span style="color:var(--accent3);">◆ ¿Acepta?</span>
+    </div>
+    <div class="lane" style="background:rgba(124,106,247,.05); border-color:rgba(124,106,247,.2);">
+      <div class="lane-lbl" style="color:var(--accent2);">⚙ SISTEMA</div>
+      [SÍ] → Crea proyecto <span class="state s-pend" style="display:inline; padding:2px 8px;">PENDIENTE</span> automáticamente (RF09) + vincula a solicitud → [NO] → Registra rechazo, no crea proyecto → 🔴 <strong style="color:#fff;">FIN</strong>
+    </div>
+    <div class="hbox">
+      <strong>Gateway ◆ en BPMN:</strong> El rombo representa la bifurcación del flujo según una condición Sí / No. Los eventos de inicio son 🟢 y las tareas del sistema son ⚙.
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════════════════════
+  SLIDE 13 — BPMN P2
+════════════════════════════════════════════════════════════ -->
+<div class="slide" data-title="BPMN · P2 Proyecto">
+  <div class="slide-label">Modelado BPMN</div>
+  <h2>P2 · Gestión del Estado del Proyecto</h2>
+  <div class="content" style="gap:12px;">
+    <div class="lane" style="background:rgba(124,106,247,.05); border-color:rgba(124,106,247,.2);">
+      <div class="lane-lbl" style="color:var(--accent2);">⚙ SISTEMA</div>
+      🟢 <strong style="color:#fff;">INICIO</strong> → Proyecto creado automáticamente en PENDIENTE (RF09) → Disponible en el panel del freelancer
+    </div>
+    <div class="lane" style="background:rgba(200,241,53,.04); border-color:rgba(200,241,53,.15);">
+      <div class="lane-lbl" style="color:var(--accent);">💼 FREELANCER</div>
+      Cambia a EN_PROGRESO → <em>(Sistema registra fechaInicio)</em> → Realiza trabajo → Cambia a EN_REVISIÓN → <span style="color:var(--accent3);">◆ ¿Completar o cancelar?</span> → COMPLETADO / CANCELADO
+    </div>
+    <div class="lane" style="background:rgba(124,106,247,.05); border-color:rgba(124,106,247,.2);">
+      <div class="lane-lbl" style="color:var(--accent2);">⚙ SISTEMA</div>
+      Registra fechaFin automáticamente (RF11)
+    </div>
+    <div class="lane" style="background:rgba(100,170,240,.05); border-color:rgba(100,170,240,.2);">
+      <div class="lane-lbl" style="color:var(--blue);">🛒 CLIENTE</div>
+      <span style="color:var(--accent3);">◆ ¿Proyecto COMPLETADO?</span> → [SÍ] Ingresa puntuación 1-5 + comentario (RF12) → [NO/CANCELADO] Sin opción de calificar → 🔴 <strong style="color:#fff;">FIN</strong>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════════════════════
+  SLIDE 14 — BPMN P3
+════════════════════════════════════════════════════════════ -->
+<div class="slide" data-title="BPMN · P3 Registro">
+  <div class="slide-label">Modelado BPMN</div>
+  <h2>P3 · Registro de Freelancer y Publicación</h2>
+  <div class="content" style="gap:12px;">
+    <div class="lane" style="background:rgba(247,162,106,.05); border-color:rgba(247,162,106,.2);">
+      <div class="lane-lbl" style="color:var(--accent3);">👤 ADMINISTRADOR</div>
+      🟢 <strong style="color:#fff;">INICIO</strong> → Ingresa datos del freelancer (RF01) → <span style="color:var(--accent3);">◆ ¿Datos válidos y únicos?</span> → [SÍ] Guarda / [NO] Corrige → Agrega habilidades: React, Figma… (RF02) → <span style="color:var(--accent3);">◆ ¿Nueva categoría?</span> → [SÍ] Crea (RF03) / [NO] Usa existente
+    </div>
+    <div class="lane" style="background:rgba(124,106,247,.05); border-color:rgba(124,106,247,.2);">
+      <div class="lane-lbl" style="color:var(--accent2);">⚙ SISTEMA</div>
+      Valida UNIQUE en documento y correo (BD) → Guarda freelancer + habilidades en PostgreSQL → Freelancer disponible para publicar servicios
+    </div>
+    <div class="lane" style="background:rgba(200,241,53,.04); border-color:rgba(200,241,53,.15);">
+      <div class="lane-lbl" style="color:var(--accent);">💼 FREELANCER</div>
+      Crea servicio: título, descripción, precio, tiempo (RF05) → Selecciona categoría → <span style="color:var(--accent3);">◆ ¿Precio y tiempo positivos?</span> → [SÍ] Publica / [NO] Corrige → Activa servicio (isActive = true) → 🔴 <strong style="color:#fff;">FIN — Servicio visible para clientes</strong>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════════════════════
+  SLIDE 15 — STACK TECNOLÓGICO
+════════════════════════════════════════════════════════════ -->
+<div class="slide" data-title="Stack Tecnológico">
+  <div class="slide-label">Arquitectura y Tecnología</div>
+  <h2>Stack Tecnológico</h2>
+  <div class="content">
+    <div class="tech-grid">
+      <div class="tech-card">
+        <div class="tech-layer">Backend</div>
+        <div class="tech-name">NestJS</div>
+        <div class="tech-desc">API REST. Arquitectura: Controller → Service → Repository</div>
+      </div>
+      <div class="tech-card">
+        <div class="tech-layer">Frontend</div>
+        <div class="tech-name">Next.js 14</div>
+        <div class="tech-desc">App Router + Tailwind CSS. Componentes reactivos y diseño responsivo.</div>
+      </div>
+      <div class="tech-card">
+        <div class="tech-layer">Base de Datos</div>
+        <div class="tech-name">PostgreSQL</div>
+        <div class="tech-desc">Con Prisma ORM. Migraciones y tipado fuerte.</div>
+      </div>
+      <div class="tech-card">
+        <div class="tech-layer">Infraestructura</div>
+        <div class="tech-name">Docker</div>
+        <div class="tech-desc">docker-compose.yml para backend, frontend y BD.</div>
+      </div>
+      <div class="tech-card">
+        <div class="tech-layer">Control de versiones</div>
+        <div class="tech-name">Git + GitHub</div>
+        <div class="tech-desc">Gestión de código y colaboración del equipo.</div>
+      </div>
+    </div>
+    <div class="hbox" style="margin-top:8px;">
+      <strong>Arquitectura en capas (NestJS):</strong> Cada módulo tiene su propio directorio con <code style="background:rgba(255,255,255,.06); padding:1px 6px; border-radius:3px; font-family:'IBM Plex Mono',monospace;">controller.ts</code>, <code style="background:rgba(255,255,255,.06); padding:1px 6px; border-radius:3px; font-family:'IBM Plex Mono',monospace;">service.ts</code> y <code style="background:rgba(255,255,255,.06); padding:1px 6px; border-radius:3px; font-family:'IBM Plex Mono',monospace;">module.ts</code>. Módulos: Freelancers, Habilidades, Categorías, Clientes, Servicios, Solicitudes, Proyectos, Calificaciones.
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════════════════════
+  SLIDE 16 — ROADMAP
+════════════════════════════════════════════════════════════ -->
+<div class="slide" data-title="Roadmap / Sprints">
+  <div class="slide-label">Planificación</div>
+  <h2>Roadmap — 4 Sprints</h2>
+  <div class="content">
+    <div class="sprint-row">
+      <div class="sprint" style="border-color:rgba(200,241,53,.25);">
+        <div class="sprint-num" style="color:var(--accent);">Sprint 1</div>
+        <div class="sprint-title">Fundación</div>
+        <ul>
+          <li>Registro de freelancers (RF01)</li>
+          <li>Gestión de habilidades (RF02)</li>
+          <li>Gestión de categorías (RF03)</li>
+          <li>Registro de clientes (RF04)</li>
+        </ul>
+      </div>
+      <div class="sprint" style="border-color:rgba(124,106,247,.25);">
+        <div class="sprint-num" style="color:var(--accent2);">Sprint 2</div>
+        <div class="sprint-title">Gestión de Servicios</div>
+        <ul>
+          <li>Publicación de servicios (RF05)</li>
+          <li>Consulta y filtrado (RF06)</li>
+          <li>Activar / desactivar servicio</li>
+        </ul>
+      </div>
+      <div class="sprint" style="border-color:rgba(247,162,106,.25);">
+        <div class="sprint-num" style="color:var(--accent3);">Sprint 3</div>
+        <div class="sprint-title">Solicitudes y Proyectos</div>
+        <ul>
+          <li>Envío de solicitudes (RF07)</li>
+          <li>Aceptar / rechazar (RF08)</li>
+          <li>Proyecto automático (RF09)</li>
+          <li>Seguimiento (RF10 · RF11)</li>
+        </ul>
+      </div>
+      <div class="sprint" style="border-color:rgba(100,220,140,.25);">
+        <div class="sprint-num" style="color:var(--green);">Sprint 4</div>
+        <div class="sprint-title">Calificaciones y Optimización</div>
+        <ul>
+          <li>Calificación de freelancers (RF12)</li>
+          <li>Comentarios y puntuación</li>
+          <li>Optimización visual</li>
+          <li>Seguridad (JWT — deuda técnica)</li>
+        </ul>
+      </div>
+    </div>
+    <div class="bigstat" style="margin-top:20px;">
+      <div class="stat-block"><div class="stat-num" style="font-size:36px;">4</div><div class="stat-label">Sprints</div></div>
+      <div class="stat-block"><div class="stat-num" style="font-size:36px;">39</div><div class="stat-label">Story Points</div></div>
+      <div class="stat-block"><div class="stat-num" style="font-size:36px;">5</div><div class="stat-label">Historias</div></div>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════════════════════
+  SLIDE 17 — CIERRE
+════════════════════════════════════════════════════════════ -->
+<div class="slide" data-title="Cierre">
+  <div class="title-deco">
+    <div class="grid-line"></div>
+    <div class="orb1" style="background:radial-gradient(circle, rgba(200,241,53,.14) 0%, transparent 65%);"></div>
+    <div class="orb2" style="background:radial-gradient(circle, rgba(124,106,247,.1) 0%, transparent 65%);"></div>
+  </div>
+  <div style="flex:1; display:flex; flex-direction:column; justify-content:center; max-width:800px; position:relative; z-index:1;">
+    <div class="tag" style="margin-bottom:24px;">Marketplace Freelance CORHUILA</div>
+    <h1>Gracias.<br><span class="hi">¿Preguntas?</span></h1>
+    <div class="rule"></div>
+    <div style="display:flex; flex-direction:column; gap:10px; margin-top:8px;">
+      <div class="card card-sm" style="display:flex; justify-content:space-between; align-items:center;">
+        <span style="font-family:'IBM Plex Mono',monospace; font-size:12px; color:var(--muted);">Backend</span>
+        <span style="font-family:'Syne',sans-serif; font-weight:700; color:#fff;">NestJS + PostgreSQL + Prisma</span>
+      </div>
+      <div class="card card-sm" style="display:flex; justify-content:space-between; align-items:center;">
+        <span style="font-family:'IBM Plex Mono',monospace; font-size:12px; color:var(--muted);">Frontend</span>
+        <span style="font-family:'Syne',sans-serif; font-weight:700; color:#fff;">Next.js 14 + Tailwind CSS</span>
+      </div>
+      <div class="card card-sm" style="display:flex; justify-content:space-between; align-items:center;">
+        <span style="font-family:'IBM Plex Mono',monospace; font-size:12px; color:var(--muted);">Infraestructura</span>
+        <span style="font-family:'Syne',sans-serif; font-weight:700; color:#fff;">Docker · Git + GitHub</span>
+      </div>
+    </div>
+    <p style="margin-top:24px; font-size:13px; color:var(--muted); font-family:'IBM Plex Mono',monospace;">
+      CORHUILA · Análisis y Diseño de Sistemas · 5° Semestre · 2025
+    </p>
+  </div>
+</div>
+
+</div><!-- end #deck -->
+
+<!-- ─── NAVIGATION BAR ─── -->
+<div id="nav-bar">
+  <button class="nav-btn" id="btn-prev" onclick="navigate(-1)" disabled>←</button>
+  <div id="progress-wrap">
+    <div id="progress-bar"><div id="progress-fill" style="width:5.88%"></div></div>
+    <div id="slide-counter">1 / 17</div>
+  </div>
+  <button class="nav-btn" id="btn-next" onclick="navigate(1)">→</button>
+  <div id="slide-title-bar" style="margin-left:20px;"></div>
+</div>
+
+<div id="kb-hint">← → o espacio para navegar · F para pantalla completa</div>
+
+<script>
+const slides = document.querySelectorAll('.slide');
+const total = slides.length;
+let cur = 0;
+
+function goTo(n) {
+  if (n < 0 || n >= total) return;
+  slides[cur].classList.remove('active');
+  slides[cur].classList.add('exit');
+  setTimeout(() => slides[cur < n ? cur : cur].classList.remove('exit'), 450);
+  cur = n;
+  slides[cur].classList.add('active');
+  setTimeout(() => {
+    document.querySelectorAll('.slide.exit').forEach(s => s.classList.remove('exit'));
+  }, 460);
+  updateUI();
+}
+
+function navigate(dir) { goTo(cur + dir); }
+
+function updateUI() {
+  document.getElementById('progress-fill').style.width = ((cur+1)/total*100)+'%';
+  document.getElementById('slide-counter').textContent = (cur+1)+' / '+total;
+  document.getElementById('btn-prev').disabled = cur === 0;
+  document.getElementById('btn-next').disabled = cur === total-1;
+  const title = slides[cur].getAttribute('data-title') || '';
+  document.getElementById('slide-title-bar').textContent = title;
+}
+
+document.addEventListener('keydown', e => {
+  if (e.key === 'ArrowRight' || e.key === ' ')  { e.preventDefault(); navigate(1); }
+  if (e.key === 'ArrowLeft')                    { e.preventDefault(); navigate(-1); }
+  if (e.key === 'f' || e.key === 'F')           {
+    if (!document.fullscreenElement) document.documentElement.requestFullscreen();
+    else document.exitFullscreen();
+  }
+  if (e.key === 'Home') goTo(0);
+  if (e.key === 'End')  goTo(total-1);
+});
+
+updateUI();
+</script>
+</body>
+</html>
